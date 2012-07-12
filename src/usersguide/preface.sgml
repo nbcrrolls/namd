@@ -1,0 +1,16 @@
+<preface id="preface" xreflabel="preface">
+<title>Preface</title>
+
+
+<para>
+The NAMD Roll installs and configures the namd v.2.8 in /opt/namd-2.8
+</para>
+
+
+<para>
+Please visit the <ulink
+url="http://www.ks.uiuc.edu/Research/namd">NAMD website</ulink> to learn more about 
+their releases and for complete information and documentation.
+</para>
+
+</preface>

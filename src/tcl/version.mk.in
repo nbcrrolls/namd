@@ -1,0 +1,4 @@
+NAME    = namd-tcl
+TCL     = tcl
+TCLVER  = 8.5.11
+EXT     = tar.gz

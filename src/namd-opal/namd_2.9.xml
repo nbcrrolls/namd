@@ -1,0 +1,57 @@
+<appConfig xmlns="http://nbcr.sdsc.edu/opal/types" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <metadata appName="NAMD 2.9">
+    <usage><![CDATA[NAMD]]></usage>
+    <info xsd:type="xsd:string">
+    <![CDATA[
+
+    ]]>
+    </info>
+    <types>
+        <flags>
+        </flags>
+
+        <taggedParams>
+
+            <param>
+                <id>procs</id>
+                <tag>-procs</tag>
+                <paramType>STRING</paramType>
+                <ioType>INPUT</ioType>
+                <default>8</default>
+                <textDesc>Number of processors</textDesc>
+            </param>
+
+            <param>
+                <id>input</id>
+                <tag>-input</tag>
+                <paramType>FILE</paramType>
+                <ioType>INPUT</ioType>
+                <textDesc>Inputs as a .tar.gz or .zip file</textDesc>
+            </param>
+
+            <param>
+                <id>config</id>
+                <tag>-config</tag>
+                <paramType>STRING</paramType>
+                <ioType>INPUT</ioType>
+                <textDesc>Configuration input file name</textDesc>
+            </param>
+        </taggedParams>
+
+        <groups>
+
+            <group>
+                <name>inputs</name>
+                <elements>procs input config</elements>
+                <required>true</required>
+                <textDesc>Required input</textDesc>
+            </group>
+
+        </groups>
+
+    </types>
+  </metadata>
+  <binaryLocation>/share/apps/namd/2.9/bin/namd.sh</binaryLocation>
+  <jobManagerFQCN>edu.sdsc.nbcr.opal.manager.ForkJobManager</jobManagerFQCN>
+  <parallel>false</parallel>
+</appConfig>

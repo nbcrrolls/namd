@@ -1,0 +1,4 @@
+NAME     = namd-fftw
+FFTW     = fftw
+FFTWVER  = 3.3.2
+EXT      = tar.gz

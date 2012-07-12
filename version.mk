@@ -1,0 +1,5 @@
+ROLLNAME	= namd$(ROLLSUFFIX)
+RELEASE		= 0
+COLOR		= navy
+
+REDHAT.ROOT	= $(PWD)
