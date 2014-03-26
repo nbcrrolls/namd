@@ -1,0 +1,21 @@
+<?xml version="1.0" standalone="no"?>
+
+<kickstart>
+
+
+	<description>
+	NAMD roll 
+	</description>
+
+	<copyright>
+	</copyright>
+
+	<changelog>
+	</changelog>
+
+	<package>roll-namd-usersguide</package>
+
+<post>
+</post>
+
+</kickstart>
