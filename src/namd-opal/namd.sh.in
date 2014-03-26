@@ -63,19 +63,27 @@ fi
 SUB=namd.sub
 touch $SUB
 cat >> $SUB << EOF 
+#!/bin/bah
 #$ -V
 #$ -S /bin/bash
 #$ -cwd
-#$ -N NAMD
+#$ -N NAMD-$config
 #$ -pe orte $procs
 #$ -e $config.err
 #$ -o $config.out
 
-MPIHOME=/opt/openmpi/gnu/mx 
-NAMDHOME=/share/apps/namd/2.9
-export LD_LIBRARY_PATH=/lib64:/usr/lib64:\$MPIHOME/lib:\$NAMDHOME/lib:\$LD_LIBRARY_PATH
+# Export libraries
+MPIHOME=@MPIBASE@/@ROLLMPI@/@ROLLCOMPILER@/@ROLLNETWORK@
+#MPIHOME=/opt/openmpi/gnu/mx 
+NAMDLIB=@PKGROOT@/lib
+CUDALIB=@CUDA@/lib64
 
-\$MPIHOME/bin/mpirun -np \$NSLOTS \$NAMDHOME/bin/namd2 $fname > $config-output
+export LD_LIBRARY_PATH=\$CUDALIB:\$MPIHOME:\$NAMDLIB:/lib:/lib64:/usr/lib64:\$LD_LIBRARY_PATH
+
+MPIRUN=$MPIHOME/bin/mpirun
+PROGRAM=@PKGROOT@/bin/namd2
+
+\$MPIRUN -np \$NSLOTS \$PROGRAM $config > $config-output
 
 EOF
 

@@ -8,14 +8,12 @@ ifndef ROLLCOMPILER
   ROLLCOMPILER = gnu
 endif
 ifndef ROLLNETWORK
-  ROLLNETWORK = mx
+  ROLLNETWORK = eth
 endif
 ifndef ROLLMPI
   ROLLMPI = openmpi
 endif
 
-PKGROOT = /opt/namd/$(VERSION)
-PKGROOT = /share/apps/namd/$(VERSION)
 REDHAT.ROOT = $(PWD)/../../
 
 
@@ -40,13 +38,13 @@ MPISETUP = \
     . /etc/profile.d/modules.sh; \
     module load $(MPIMODULE); \
   fi; \
-  export MPI_HOME=/opt/$(ROLLMPI)/$(ROLLCOMPILER)/$(ROLLNETWORK); \
+  export MPI_HOME=$(MPIBASE)/$(ROLLMPI)/$(ROLLCOMPILER)/$(ROLLNETWORK); \
   if test -z "$${MPI_HOME}"; then \
-    export MPI_HOME=/opt/$(ROLLMPI); \
+    export MPI_HOME=$(MPIBASE)/$(ROLLMPI); \
   fi; \
   echo Using MPI from $${MPI_HOME}; \
   export PATH=$${MPI_HOME}/bin:$${PATH}; \
-  export LD_LIBRARY_PATH=$${MPI_HOME}/lib:/opt/cuda/lib64:$${LD_LIBRARY_PATH}
+  export LD_LIBRARY_PATH=$${MPI_HOME}/lib:$(CUDA)/lib64:$${LD_LIBRARY_PATH}
 
 FCC = gfortran
 #CHARMARCH = mpi-linux-x86_64-$(FCC)-mpicxx
@@ -55,7 +53,7 @@ CHARMARCH = mpi-linux-x86_64
 CHARMBUILDOPTS = --with-production -j8 
 CXX = g++
 CC = gcc
-CUDAOPT = 
+CUDAOPT = --with-cuda --cuda-prefix $(CUDA)
 NAMDOPT = $(CUDAOPT) --with-fftw3 --charm-arch $(CHARMARCH)
 
 ifeq ("$(ROLLCOMPILER)", "intel")
@@ -99,6 +97,8 @@ install::
 	cp $(SOURCE)/*/{charmrun,flipbinpdb,flipdcd,namd2,psfgen} \
 	   $(ROOT)/$(PKGROOT)/bin
 	cp -r tiny $(ROOT)/$(PKGROOT)
+	mkdir -p -m 755 $(ROOT)/$(PKGROOT)/examples
+	install -m 644 sge-namd*.sub $(ROOT)/$(PKGROOT)/examples/
 
 clean::
 	rm -rf $(SOURCE) tiny

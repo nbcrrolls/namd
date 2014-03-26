@@ -4,7 +4,6 @@
 # @Copyright@
 # @Copyright@
 
-PKGROOT = /share/apps/namd/$(VERSION)
 
 REDHAT.ROOT = $(PWD)/../../
 

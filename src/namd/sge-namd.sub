@@ -1,0 +1,34 @@
+##########################################################
+#  Example SGE submit script  
+#  run namd2 job without GPU using mx interface
+##########################################################
+
+#$ -V
+#$ -cwd
+#$ -pe orte 24
+#$ -q all.q
+#$ -N JobName
+#$ -e JobName.err
+#$ -o JobName.out
+#$ -S /bin/bash
+#$ -l h_vmem=20G
+
+# Set path for openmpi
+MPIDIR=/share/apps/openmpi/gnu/mx
+MPIRUN=$MPIDIR/bin/mpirun
+
+# Set path for namd
+NAMDDIR=/share/apps/namd/2.9
+NAMD2=$NAMDDIR/bin/namd2
+
+# Export Library path
+export LD_LIBRARY_PATH=$MPIDIR/lib:$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=$NAMDDIR/lib:$LD_LIBRARY_PATH
+
+# Use mx interface for communication 
+export MX_RCACHE=0 
+MCA="--mca btl mx,sm,self"
+
+# run job in your directory with your data
+cd /data/scratch/your-account/your/data/path
+$MPIRUN $MCA -np $NSLOTS $NAMD2 prog.conf > JobName.log

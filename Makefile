@@ -67,7 +67,7 @@ ifndef ROLLMPI
   ROLLMPI = openmpi
 endif
 ifndef ROLLNETWORK
-  ROLLNETWORK = mx
+  ROLLNETWORK = eth
 endif
 empty:=
 space:=$(empty) $(empty)

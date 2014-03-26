@@ -3,28 +3,24 @@ This roll is based on triton's chemistry roll.
 URL="http://git.rocksclusters.org/cgi-bin/gitweb.cgi?p=triton/chemistry/.git;a=snapshot;h=604b04ef86a148ab8ab053f80de4ee38468c2ddb;sf=tgz"
 wget $URL -O chemistry.tar.gz
 
-For NAMD roll compiler netwrok and mpi variables are set in Makefile
-or can do:
-make ROLLCOMPILER=gnu ROLLMPI=openmpi ROLLNETWORK=mx
+ROLLCOMPILER, ROLLNETWORK and ROLLMPI variables are set in Makefile.
+To overwrite run: 
+    make ROLLCOMPILER=gnu ROLLMPI=openmpi ROLLNETWORK=mx
+Produces a roll with a name that begins "namd_gcc_mx_openmpi" 
 
-Produces a roll with a name that begins "namd_gcc_openmpi_mx" 
-
-------------------------------------------------------------------------------------
 From original roll README:
+
 This roll source supports building with different compilers and for different
 network fabrics and mpi flavors.  By default, it builds using the gnu compilers
 for openmpi ethernet.  To build for a different configuration, use the
 ROLLCOMPILER, ROLLMPI and ROLLNETWORK make variables, e.g.,
 
-make ROLLCOMPILER=intel ROLLMPI=mpich2 ROLLNETWORK=mx 
+    # make ROLLCOMPILER=intel ROLLMPI=mpich2 ROLLNETWORK=mx 
 
-The build process currently supports one or more of the values "intel" and
-"gnu" for the ROLLCOMPILER variable, defaulting to "gnu".  It supports ROLLMPI
-values "openmpi", "mpich2", and "mvapich2", defaulting to "openmpi".  It uses
-any ROLLNETWORK variable value(s) to load appropriate mpi modules, assuming
-that there are modules named $(ROLLMPI)_$(ROLLNETWORK) available (e.g.,
-openmpi_ib, mpich2_mx, etc.).
-
-If the ROLLCOMPILER, ROLLNETWORK and/or ROLLMPI variables are specified, their
-values are incorporated into the names of the produced roll and rpms, e.g.,
+The build process currently supports one or more of the values for the variables:
+ROLLCOMPILER: gnu, intel, pgi  (default gnu)
+ROLLMPI     : openmpi, mpich2,and mvapich2 (default openmpi)  
+ROLLNETWORK : any variable value(s) to load appropriate mpi modules, assuming 
+              that there are modules named $(ROLLMPI)_$(ROLLNETWORK) available 
+              (e.g., openmpi_ib, mpich2_mx, etc.).
 

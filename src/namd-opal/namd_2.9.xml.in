@@ -51,7 +51,7 @@
 
     </types>
   </metadata>
-  <binaryLocation>/share/apps/namd/2.9/bin/namd.sh</binaryLocation>
+  <binaryLocation>@PKGROOT@/bin/namd.sh</binaryLocation>
   <jobManagerFQCN>edu.sdsc.nbcr.opal.manager.ForkJobManager</jobManagerFQCN>
   <parallel>false</parallel>
 </appConfig>

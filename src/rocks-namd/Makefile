@@ -71,5 +71,5 @@ install::
 	mkdir -p $(ROOT)/etc/profile.d
 	$(INSTALL) -m755  namd.*sh  $(ROOT)/etc/profile.d
 clean::
-	rm -f $(NAME).spec.in
+	rm -f $(NAME).spec.in version.mk
 

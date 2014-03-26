@@ -58,8 +58,19 @@
 # initial revision. Based on triton's chemistry roll.
 #
 
-PKGROOT = /opt/opal/deployed
-NAMDBIN = /opt/namd/$(VERSION)/bin
+ifndef ROLLCOMPILER
+  ROLLCOMPILER = gnu
+endif
+ifndef ROLLNETWORK
+  ROLLNETWORK = eth
+endif
+ifndef ROLLMPI
+  ROLLMPI = openmpi
+endif
+
+
+OPALDIR = /opt/opal/deployed
+NAMDBIN = $(PKGROOT)/bin
 
 REDHAT.ROOT = $(CURDIR)/../../
 -include $(ROCKSROOT)/etc/Rules.mk
@@ -67,14 +78,32 @@ include Rules.mk
 
 version.mk:
 	cat version.mk.in ../version.mk > version.mk
-build::
+	echo $(ROLLMPI)
 
-install::
-	mkdir -p $(ROOT)/$(PKGROOT)
-	$(INSTALL)  -m 0644  namd_$(VERSION).xml $(ROOT)/$(PKGROOT)
+SEDSPEC += \
+        -e 's%@ROLLMPI@%$(ROLLMPI)%g' \
+        -e 's%@ROLLNETWORK@%$(ROLLNETWORK)%g' \
+        -e 's%@ROLLCOMPILER@%$(ROLLCOMPILER)%g' \
+        -e 's%@MPIBASE@%$(MPIBASE)%g' \
+        -e 's%@CUDA@%$(CUDA)%g' \
+        -e 's%@PKGROOT@%$(PKGROOT)%g'
+
+SCRIPTS = namd_2.9.xml namd.sh
+
+namd_2.9.xml: namd_2.9.xml.in
+	$(SED) $(SEDSPEC) $^ > $@
+
+namd.sh: namd.sh.in
+	$(SED) $(SEDSPEC) $^ > $@
+
+build: $(SCRIPTS)
+
+install:: 
+	mkdir -p $(ROOT)/$(OPALDIR)
+	$(INSTALL)  -m 0644  namd_$(VERSION).xml $(ROOT)/$(OPALDIR)
 	mkdir -p $(ROOT)/$(NAMDBIN)
 	install -m755 namd.sh  $(ROOT)/$(NAMDBIN)
 
 clean::
-	rm -rf version.mk
+	rm -rf version.mk $(SCRIPTS)
 
