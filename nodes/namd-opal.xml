@@ -16,19 +16,4 @@
 	<package>namd_ROLLCOMPILER_ROLLNETWORK_ROLLMPI</package>
 	<package>namd-opal</package>
 
-<post>
-if test -d /opt/opal; then
-
-<file name="/opt/opal/deployed/deploy.sh" mode="append">
-# namd 2.8 
-namdver=2.8
-namd_bin=/opt/namd/2.8/bin/namd.sh
-if test -e $namd_bin; then
-    $ANT -f $OPALXML deploy -DserviceName=namd_${namdver} -DappConfig=$OPALCONFIG/namd_${namdver}.xml
-fi
-</file>
-
-fi
-
-</post>
 </kickstart>
