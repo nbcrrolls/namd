@@ -69,7 +69,7 @@ ifndef ROLLMPI
 endif
 
 
-OPALDIR = /opt/tomcat/deployed
+OPALDIR = /opt/opal/deployed
 NAMDBIN = $(PKGROOT)/bin
 
 REDHAT.ROOT = $(CURDIR)/../../
