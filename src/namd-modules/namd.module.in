@@ -1,0 +1,22 @@
+#%Module1.0
+##
+## namd modulefile
+##
+## modulefiles/
+##
+proc ModulesHelp { } {
+        global namdversion
+
+        puts stderr "\NAMD Tools from /opt/namd@VERSION@/@COMPILERNAME@"
+        puts stderr "\tNAMD Version $namdversion\n"
+}
+
+module-whatis   "NAMD Version @VERSION@"
+module-whatis   "Compiled with @COMPILERNAME@ compiler"
+
+# for Tcl script use only
+set     namdversion @VERSION@
+
+setenv NAMDHOME /opt/namd@VERSION@/@COMPILERNAME@
+prepend-path PATH /opt/namd@VERSION@/@COMPILERNAME@/bin
+module load @PREREQMODULES@
