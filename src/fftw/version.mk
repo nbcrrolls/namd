@@ -1,0 +1,21 @@
+
+ifndef ROLLCOMPILER
+  ROLLCOMPILER = gnu
+endif
+COMPILERNAME := $(firstword $(subst /, ,$(ROLLCOMPILER)))
+
+VERSION.MK.MASTER = version.mk
+VERSION.MK.MASTER.DIR = ..
+VERSION.MK.INCLUDE = namd.version.mk
+include $(VERSION.MK.INCLUDE)
+
+NAME           = namd-fftw-$(COMPILERNAME)
+VERSION        = $(FFTWVER)
+
+SOURCE_NAME    = fftw
+SOURCE_SUFFIX  = tar.gz
+SOURCE_VERSION = $(VERSION)
+SOURCE_PKG     = $(SOURCE_NAME)-$(SOURCE_VERSION).$(SOURCE_SUFFIX)
+SOURCE_DIR     = $(SOURCE_PKG:%.$(SOURCE_SUFFIX)=%)
+
+TAR_GZ_PKGS    = $(SOURCE_PKG)
