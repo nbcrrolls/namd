@@ -13,10 +13,17 @@ proc ModulesHelp { } {
 
 module-whatis   "NAMD Version @VERSION@"
 module-whatis   "Compiled with @COMPILERNAME@ compiler"
+module-whatis   "FFTW version @FFTWVER@ "
+module-whatis   "TCL version @TCLVER@ "
 
 # for Tcl script use only
 set     namdversion @VERSION@
 
-setenv NAMDHOME /opt/namd@VERSION@/@COMPILERNAME@
-prepend-path PATH /opt/namd@VERSION@/@COMPILERNAME@/bin
+
+set namdHome /opt/namd@VERSION@/@COMPILERNAME@
+setenv NAMDHOME  $namdHome
+prepend-path PATH $namdHome/bin
+prepend-path LD_LIBRARY_PATH $namdHome/lib
+prepend-path MANPATH $namdHome/share/man
+
 module load @PREREQMODULES@

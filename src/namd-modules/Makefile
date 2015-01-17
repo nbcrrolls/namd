@@ -65,6 +65,8 @@ MODULEFILES = namd.module namd.version
 ADDSED = \
 	-e s%@PREREQMODULES@%$(PREREQMODULES)%g  \
 	-e s%@COMPILERNAME@%$(COMPILERNAME)%g  \
+	-e s%@FFTWVER@%$(FFTWVER)%g  \
+	-e s%@TCLVER@%$(TCLVER)%g  \
 	-e s%@ROLLNETWORK@%$(ROLLNETWORK)%g 
 
 %: %.in
