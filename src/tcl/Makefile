@@ -4,33 +4,39 @@
 # @Copyright@
 # @Copyright@
 
-
 REDHAT.ROOT = $(PWD)/../../
 
 -include $(ROCKSROOT)/etc/Rules.mk
 include Rules.mk
+include $(NBCRDEVEL)/NBCR.mk
 
 OPTS = 
-SOURCE = $(TCL)$(TCLVER)
 
-version.mk:
-	cat ../version.mk version.mk.in > version.mk
+pretar:: $(VERSION.MK.INCLUDE)
 
-build:
-	tar zxf $(SOURCE)-src.$(EXT)
+info:
+	echo $(PKGROOT)
+
+$(VERSION.MK.INCLUDE): 
+	if [ -f $(VERSION.MK.MASTER.DIR)/$(VERSION.MK.MASTER) ]; then \
+	    /bin/cp $(VERSION.MK.MASTER.DIR)/$(VERSION.MK.MASTER) $@; \
+	fi
+
+
+build: $(SRC_DIRS)
 	(                                                 \
-		cd $(SOURCE)/unix;                    \
+		cd $(SOURCE_DIR)/unix;                    \
 		./configure --prefix=$(PKGROOT) $(OPTS) ; \
 	)
 	
 install::
 	mkdir -p  $(ROOT)/$(PKGROOT)
 	(                                                 \
-		cd $(SOURCE)/unix;                    \
+		cd $(SOURCE_DIR)/unix;                    \
 		make -j8 ;                                \
 		make DESTDIR=$(ROOT) install ;            \
 	)
 
 clean::
-	rm -rf $(SOURCE)
-	rm -rf version.mk
+	rm -rf $(SOURCE_DIR)
+	rm -rf $(VERSION.MK.INCLUDE)
