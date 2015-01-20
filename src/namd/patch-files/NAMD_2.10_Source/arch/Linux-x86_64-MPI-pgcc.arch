@@ -1,0 +1,11 @@
+NAMD_ARCH = Linux-x86_64
+CHARMARCH = mpi-linux-x86_64-pgf90-mpicxx
+
+FLOATOPTS = -fast
+
+CXX = pgCC
+CXXOPTS = $(FLOATOPTS)
+CXXNOALIASOPTS = $(FLOATOPTS)
+
+CC = pgcc
+COPTS = $(FLOATOPTS)

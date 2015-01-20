@@ -1,7 +1,10 @@
-VERSION = 2.9
-RELEASE = 1
+NAMDVER  = 2.10
+CHARMVER = 6.6.1
 
-#PKGROOT = /opt/namd/$(VERSION)
-PKGROOT = /share/apps/namd-cuda/$(VERSION)
-MPIBASE = /share/apps
-CUDA = /opt/cuda
+FFTWVER  = 3.3.4
+TCLVER   = 8.6.3
+
+RELEASE  = 0
+
+PKGROOT  = /opt/namd$(NAMDVER)/$(COMPILERNAME)
+CUDA     = /opt/cuda

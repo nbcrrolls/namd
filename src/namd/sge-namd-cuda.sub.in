@@ -1,0 +1,27 @@
+######################################################################
+#  Example SGE submit script  
+#  run namd2 compiled with GNU compilers, MPI and if available CUDA
+#
+#  Currently the following nmd modules are available:
+#      namd@VERSION@/gnu   - compiled with gnu complier 
+#      namd@VERSION@/intel - compiled with intel complier 
+#
+######################################################################
+
+#$ -V
+#$ -cwd
+#$ -pe orte 4
+#$ -q gpu   
+#$ -N JobName
+#$ -e JobName.err
+#$ -o JobName.out
+#$ -S /bin/bash
+#$ -l h_vmem=20G
+
+# load NAMD module. IT will load prerequisite compiler, mpi and cuda modules
+module load namd@VERSION@/gnu
+
+# run job in your directory with your data
+cd /data/scratch/your-account/your/data/path
+mpirun $OMPI_MCA -np $NSLOTS namd2 +idelpoll prog.conf > JobName.log
+

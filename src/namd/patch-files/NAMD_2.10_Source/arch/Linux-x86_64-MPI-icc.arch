@@ -1,0 +1,10 @@
+NAMD_ARCH = Linux-x86_64
+
+FLOATOPTS = -ip -fno-rtti -xHOST
+
+CXX = icpc
+CXXOPTS = -static-intel -O2 $(FLOATOPTS)
+CXXNOALIASOPTS = -O3 -fno-alias $(FLOATOPTS)
+
+CC = icc
+COPTS = -static-intel -O2 $(FLOATOPTS)

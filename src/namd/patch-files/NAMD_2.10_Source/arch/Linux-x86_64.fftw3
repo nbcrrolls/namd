@@ -1,0 +1,8 @@
+
+FFTDIR=/opt/namd2.10/gnu
+
+FFTINCL=-I$(FFTDIR)/include
+FFTLIB=-L$(FFTDIR)/lib -lfftw3f
+FFTFLAGS=-DNAMD_FFTW -DNAMD_FFTW_3
+FFT=$(FFTINCL) $(FFTFLAGS)
+

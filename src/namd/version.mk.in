@@ -1,4 +1,0 @@
-SOURCE   =  NAMD_$(VERSION)_Source
-EXT      = tar.gz
-NAME     = namd_$(ROLLCOMPILER)_$(ROLLNETWORK)_$(ROLLMPI)
-CHARMVER = 6.4.0
