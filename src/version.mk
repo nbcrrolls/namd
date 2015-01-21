@@ -7,4 +7,4 @@ TCLVER   = 8.6.3
 RELEASE  = 0
 
 PKGROOT  = /opt/namd$(NAMDVER)/$(COMPILERNAME)
-CUDA     = /opt/cuda
+CUDAHOME     = /opt/cuda
