@@ -58,52 +58,38 @@
 # initial revision. Based on triton's chemistry roll.
 #
 
-ifndef ROLLCOMPILER
-  ROLLCOMPILER = gnu
-endif
-ifndef ROLLNETWORK
-  ROLLNETWORK = eth
-endif
-ifndef ROLLMPI
-  ROLLMPI = openmpi
-endif
-
-
-OPALDIR = /opt/opal/deployed
-NAMDBIN = $(PKGROOT)/bin
-
-REDHAT.ROOT = $(CURDIR)/../../
+REDHAT.ROOT = $(PWD)/../../
 -include $(ROCKSROOT)/etc/Rules.mk
 include Rules.mk
+include $(NBCRDEVEL)/NBCR.mk
 
-version.mk:
-	cat version.mk.in ../version.mk > version.mk
-	echo $(ROLLMPI)
+OPALDIR = /opt/opal/deployed
+SCRIPTS = namdsh namd.xml 
 
-SEDSPEC += \
-        -e 's%@ROLLMPI@%$(ROLLMPI)%g' \
-        -e 's%@ROLLNETWORK@%$(ROLLNETWORK)%g' \
-        -e 's%@ROLLCOMPILER@%$(ROLLCOMPILER)%g' \
-        -e 's%@MPIBASE@%$(MPIBASE)%g' \
-        -e 's%@CUDA@%$(CUDA)%g' \
-        -e 's%@PKGROOT@%$(PKGROOT)%g'
+ADDSED = \
+	-e s%@COMPILERNAME@%$(COMPILERNAME)%g  \
+	-e s%@NAMDVER@%$(NAMDVER)%g  \
+	-e s%@PKGROOT@%$(PKGROOT)%g  \
+	-e s%@ROLLNETWORK@%$(ROLLNETWORK)%g 
 
-SCRIPTS = namd_2.9.xml namd.sh
+$(VERSION.MK.INCLUDE): 
+	if [ -f $(VERSION.MK.MASTER.DIR)/$(VERSION.MK.MASTER) ]; then \
+	  /bin/cp $(VERSION.MK.MASTER.DIR)/$(VERSION.MK.MASTER) $@; \
+	fi
 
-namd_2.9.xml: namd_2.9.xml.in
-	$(SED) $(SEDSPEC) $^ > $@
+pretar:: $(VERSION.MK.INCLUDE)
 
-namd.sh: namd.sh.in
-	$(SED) $(SEDSPEC) $^ > $@
+%: %.in
+	$(SED) $(SEDSCRIPT) $(ADDSED) $^ > $@
 
 build: $(SCRIPTS)
 
 install:: 
 	mkdir -p $(ROOT)/$(OPALDIR)
-	$(INSTALL)  -m 0644  namd_$(VERSION).xml $(ROOT)/$(OPALDIR)
-	mkdir -p $(ROOT)/$(NAMDBIN)
-	install -m755 namd.sh  $(ROOT)/$(NAMDBIN)
+	$(INSTALL)  -m 0644  namd.xml $(ROOT)/$(OPALDIR)/namd_$(NAMDVER).xml
+	mkdir -p $(ROOT)/$(PKGROOT)/bin
+	install -m755 namdsh  $(ROOT)/$(PKGROOT)/bin/namd.sh
 
 clean::
-	rm -rf version.mk $(SCRIPTS)
-
+	rm -rf $(SCRIPTS)
+	rm -rf $(VERSION.MK.INCLUDE)

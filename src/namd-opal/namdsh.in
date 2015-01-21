@@ -72,26 +72,14 @@ cat >> $SUB << EOF
 #$ -e $config.err
 #$ -o $config.out
 
-# Export libraries
-MPIHOME=@MPIBASE@/@ROLLMPI@/@ROLLCOMPILER@/@ROLLNETWORK@
-#MPIHOME=/opt/openmpi/gnu/mx 
-NAMDLIB=@PKGROOT@/lib
-CUDALIB=@CUDA@/lib64
+# load NAMD module. It will load prerequisite compiler and mpi modules
+module load namd@NAMDVER@/@COMPILERNAME@
 
-export LD_LIBRARY_PATH=\$CUDALIB:\$MPIHOME:\$NAMDLIB:/lib:/lib64:/usr/lib64:\$LD_LIBRARY_PATH
-
-MPIRUN=$MPIHOME/bin/mpirun
 PROGRAM=@PKGROOT@/bin/namd2
 
 \$MPIRUN -np \$NSLOTS \$PROGRAM $config > $config-output
 
 EOF
-
-#export SGE_ROOT=/opt/gridengine
-#export SGE_ARCH=lx26-amd64
-#export SGE_CELL=default
-#export SGE_EXECD_PORT=537
-#export SGE_QMASTER_PORT=536
 
 # Run job
 qsub $SUB
