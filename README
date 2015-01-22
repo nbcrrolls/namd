@@ -1,26 +1,17 @@
 This roll is based on triton's chemistry roll.
 
-URL="http://git.rocksclusters.org/cgi-bin/gitweb.cgi?p=triton/chemistry/.git;a=snapshot;h=604b04ef86a148ab8ab053f80de4ee38468c2ddb;sf=tgz"
-wget $URL -O chemistry.tar.gz
-
 ROLLCOMPILER, ROLLNETWORK and ROLLMPI variables are set in Makefile.
-To overwrite run: 
-    make ROLLCOMPILER=gnu ROLLMPI=openmpi ROLLNETWORK=mx
-Produces a roll with a name that begins "namd_gcc_mx_openmpi" 
-
-From original roll README:
-
-This roll source supports building with different compilers and for different
-network fabrics and mpi flavors.  By default, it builds using the gnu compilers
-for openmpi ethernet.  To build for a different configuration, use the
-ROLLCOMPILER, ROLLMPI and ROLLNETWORK make variables, e.g.,
-
-    # make ROLLCOMPILER=intel ROLLMPI=mpich2 ROLLNETWORK=mx 
-
 The build process currently supports one or more of the values for the variables:
 ROLLCOMPILER: gnu, intel, pgi  (default gnu)
-ROLLMPI     : openmpi, mpich2,and mvapich2 (default openmpi)  
-ROLLNETWORK : any variable value(s) to load appropriate mpi modules, assuming 
-              that there are modules named $(ROLLMPI)_$(ROLLNETWORK) available 
-              (e.g., openmpi_ib, mpich2_mx, etc.).
+ROLLMPI     : openmpi (default openmpi)  
+ROLLNETWORK : eth (default)
+
+To overwrite run: 
+    make ROLLCOMPILER=gnu ROLLMPI=openmpi ROLLNETWORK=eth
+
+Downloads:
+fftw - http://www.fftw.org/download.html
+tcl  - http://sourceforge.net/projects/tcl/files/Tcl/8.6.3/tcl8.6.3-src.tar.gz
+NAMD distro NAMD_2.10_Source.tar.gz is available on google drive on nbcr.ucsd@gmail.com account
+
 
