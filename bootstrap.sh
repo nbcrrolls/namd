@@ -9,9 +9,9 @@ if [ $# -ne 1 ]; then
 fi 
 
 # build and install fftw 
-(cd src/fftw; make ROLLCOMPILER=$1 rpm; make clean)
+(cd src/fftw; make ROLLCOMPILER=$1 rpm; make ROLLCOMPILER=$1 clean)
 rpm -i RPMS/x86_64/namd-fftw-$1*.rpm
 
 # build and install tcl 
-(cd src/tcl; make ROLLCOMPILER=$1 rpm; make clean)
+(cd src/tcl; make ROLLCOMPILER=$1 rpm; make ROLLCOMPILER=$1 clean)
 rpm -i RPMS/x86_64/namd-tcl-$1*.rpm
