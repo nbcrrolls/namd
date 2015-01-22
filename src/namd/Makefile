@@ -11,13 +11,23 @@ include Rules.mk
 include $(NBCRDEVEL)/NBCR.mk
 
 # charm options 
+CC = gcc
+CXX = g++
+FCC = gfortran
+
 CHARMARCH = mpi-linux-x86_64
 CHARMBUILDOPTS = -no-build-shared -DCMK_OPTIMIZE
 CHARMBUILDOPTS =  --with-production -j8
 ifeq ("$(COMPILERNAME)", "intel")
+  CC = icc
+  CXX = icpc
+  FCC = ifort
   CHARMARCH = mpi-linux-x86_64-$(FCC)-mpicxx
   CHARMBUILDOPTS = mpicxx $(FCC) -j16 -O2  -xHOST
 else ifeq ("$(COMPILERNAME)", "pgi")
+  CC = pgcc
+  CXX = pgCC
+  FCC = pgf90
   CHARMARCH = mpi-linux-x86_64-$(FCC)-mpicxx
   CHARMBUILDOPTS = mpicxx $(FCC) -j16 -O2  -fast
 endif
