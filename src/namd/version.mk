@@ -26,7 +26,7 @@ ifneq ("$(CUDA)", "")
   HAVECUDA = -$(CUDA)
 endif
 
-NAME           = namd-$(COMPILERNAME)$(HAVECUDA)
+NAME           = namd-$(COMPILERNAME)-$(ROLLNETWORK)-$(ROLLMPI)
 VERSION        = $(NAMDVER)
 
 SOURCE_NAME    = NAMD

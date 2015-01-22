@@ -25,7 +25,7 @@ include $(VERSION.MK.INCLUDE)
 
 PACKAGE     = namd
 CATEGORY    = applications
-NAME        = namd-module-$(COMPILERNAME)-$(ROLLNETWORK)
+NAME        = namd-module-$(COMPILERNAME)-$(ROLLNETWORK)-$(ROLLMPI)
 RELEASE     = 0
 PKGROOT     = /opt/modulefiles/$(CATEGORY)/$(PACKAGE)$(VERSION)
 
