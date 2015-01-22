@@ -1,4 +1,4 @@
-ROLLNAME	= namd$(ROLLSUFFIX)
+ROLLNAME	= namd
 RELEASE		= 0
 COLOR		= navy
 

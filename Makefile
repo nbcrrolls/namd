@@ -5,9 +5,9 @@
 # 
 # 				Rocks(r)
 # 		         www.rocksclusters.org
-# 		         version 5.4.3 (Viper)
+# 		         version 6.2 (SideWinder)
 # 
-# Copyright (c) 2000 - 2011 The Regents of the University of California.
+# Copyright (c) 2000 - 2014 The Regents of the University of California.
 # All rights reserved.	
 # 
 # Redistribution and use in source and binary forms, with or without
@@ -26,7 +26,7 @@
 # features or use of this software must display the following acknowledgement: 
 # 
 # 	"This product includes software developed by the Rocks(r)
-# 	Development Team at the San Diego Supercomputer Center at the
+# 	Cluster Group at the San Diego Supercomputer Center at the
 # 	University of California, San Diego and its contributors."
 # 
 # 4. Except as permitted for the purposes of acknowledgment in paragraph 3,
@@ -63,23 +63,21 @@
 ifndef ROLLCOMPILER
   ROLLCOMPILER = gnu
 endif
+
 ifndef ROLLMPI
   ROLLMPI = openmpi
 endif
+
 ifndef ROLLNETWORK
   ROLLNETWORK = eth
 endif
-empty:=
-space:=$(empty) $(empty)
-ROLLSUFFIX = _$(subst $(space),+,$(ROLLCOMPILER))_$(subst $(space),+,$(ROLLNETWORK))_$(subst $(space),+,$(ROLLMPI))
 
 -include $(ROLLSROOT)/etc/Rolls.mk
 include Rolls.mk
 
-default:
-# Copy and substitute lines of nodes/*.in that reference ROLLCOMPILER,
-# ROLLNETWORK, and/or ROLLMPI, making one copy for each
-# ROLLCOMPILER/ROLLNETWORK/ROLLMPI value
+preroll::
+# Copy and substitute lines of nodes/*.in that reference ROLLCOMPILER, ROLLNETWORK, and/or ROLLMPI, 
+# making one copy for each ROLLCOMPILER/ROLLNETWORK/ROLLMPI value
 	for i in `ls nodes/*.in`; do \
 	  export o=`echo $$i | sed 's/\.in//'`; \
 	  cp $$i $$o; \
@@ -94,6 +92,8 @@ default:
 	  done; \
 	  perl -pi -e '$$_ = "" if m/ROLL(COMPILER|NETWORK|MPI)/' $$o; \
 	done
+
+default:
 	$(MAKE) ROLLCOMPILER="$(ROLLCOMPILER)" ROLLNETWORK="$(ROLLNETWORK)" ROLLMPI="$(ROLLMPI)" roll
 
 clean::
