@@ -1,6 +1,9 @@
 #!/bin/bash
 
 # Compile and install NAMD prerequisites
+# NAMD distro NAMD_2.10_Source.tar.gz is available on google drive on nbcr.ucsd@gmail.com 
+# or from nbcrrolls/source private repo
+
 
 if [ $# -ne 1 ]; then
     echo "Usage: $0 compiler"

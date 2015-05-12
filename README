@@ -10,8 +10,7 @@ To overwrite run:
     make ROLLCOMPILER=gnu ROLLMPI=openmpi ROLLNETWORK=eth
 
 Downloads:
-fftw - http://www.fftw.org/download.html
-tcl  - http://sourceforge.net/projects/tcl/files/Tcl/8.6.3/tcl8.6.3-src.tar.gz
-NAMD distro NAMD_2.10_Source.tar.gz is available on google drive on nbcr.ucsd@gmail.com account
+    fftw - http://www.fftw.org/download.html
+    tcl  - http://sourceforge.net/projects/tcl/files/Tcl/8.6.3/tcl8.6.3-src.tar.gz
 
 
