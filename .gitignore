@@ -1,22 +1,32 @@
 # build directory
-RPMS/
-SOURCES/
 BUILD/
+RPMS/
+SRPMS/
+SOURCES/
 SPECS/
 disk*/
-*.iso
 
+bootstrap.py
+build.log
 _os
 _arch
 _distribution
 .rpmmacros
+*.iso
 
 # ignore version, rules  files
 Rules-*.mk
 Rules.mk
 Rolls.mk
 roll*.mk
-rocks-*.mk
+rocks*.mk
+roll-namd.*
+python.mk
+roll*.xml
+
+nodes/namd-common.xml
+nodes/namd-opal.xml
 
 # ignore protected src files
 src/namd/*gz
+
