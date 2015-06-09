@@ -24,6 +24,7 @@ set namdHome /opt/namd@VERSION@/@COMPILERNAME@@CUDA@
 setenv NAMDHOME  $namdHome
 prepend-path PATH $namdHome/bin
 prepend-path LD_LIBRARY_PATH $namdHome/lib
+prepend-path LD_LIBRARY_PATH /opt/namd@VERSION@/@COMPILERNAME@/lib
 prepend-path MANPATH $namdHome/share/man
 
 module load @PREREQMODULES@
