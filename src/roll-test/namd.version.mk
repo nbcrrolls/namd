@@ -1,0 +1,10 @@
+NAMDVER  = 2.10
+CHARMVER = 6.6.1
+
+FFTWVER  = 3.3.4
+TCLVER   = 8.6.3
+
+RELEASE  = 0
+
+PKGROOT  = /opt/namd$(NAMDVER)/$(COMPILERNAME)
+CUDAHOME     = /opt/cuda
