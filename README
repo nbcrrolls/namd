@@ -5,9 +5,10 @@ The build process currently supports one or more of the values for the variables
 ROLLCOMPILER: gnu, intel, pgi  (default gnu)
 ROLLMPI     : openmpi (default openmpi)  
 ROLLNETWORK : eth (default)
+ROLLCUDA    : nocuda (default)
 
-To overwrite run: 
-    make ROLLCOMPILER=gnu ROLLMPI=openmpi ROLLNETWORK=eth
+To overwrite  and create executable for cuda/non-cuda for intel and gnu compielrs run: 
+    make ROLLCOMPILER="gnu intel" ROLLMPI=openmpi ROLLNETWORK=eth ROLLCUDA="cuda nocuda"
 
 Downloads:
     fftw - http://www.fftw.org/download.html

@@ -67,6 +67,7 @@ ADDSED = \
 	-e s%@COMPILERNAME@%$(COMPILERNAME)%g  \
 	-e s%@FFTWVER@%$(FFTWVER)%g  \
 	-e s%@TCLVER@%$(TCLVER)%g  \
+	-e s%@CUDA@%$(CUDA)%g  \
 	-e s%@ROLLNETWORK@%$(ROLLNETWORK)%g 
 
 %: %.in
@@ -76,9 +77,6 @@ ADDSED = \
 
 pretar:: $(VERSION.MK.INCLUDE)
 
-# if cuda exists set to add to loaded modules
-CUDA = 
-CUDA = $(shell if [ -x $(CUDAHOME) ]; then echo cuda ; fi;)
 
 $(VERSION.MK.INCLUDE): 
 	if [ -f $(VERSION.MK.MASTER.DIR)/$(VERSION.MK.MASTER) ]; then \
@@ -89,8 +87,8 @@ build: $(MODULEFILES)
 
 install:: 
 	mkdir -p -m 755 $(ROOT)/$(PKGROOT)
-	cp *.module $(ROOT)/$(PKGROOT)/$(COMPILERNAME); \
-	cp *.version $(ROOT)/$(PKGROOT)/.version.$(COMPILERNAME); \
+	cp *.module $(ROOT)/$(PKGROOT)/$(COMPILERNAME)$(CUDA); \
+	cp *.version $(ROOT)/$(PKGROOT)/.version.$(COMPILERNAME)$(CUDA); \
 
 clean::
 	rm -f $(VERSION.MK.INCLUDE)

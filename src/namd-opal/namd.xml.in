@@ -1,5 +1,5 @@
 <appConfig xmlns="http://nbcr.sdsc.edu/opal/types" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <metadata appName="NAMD @NAMDVER@">
+  <metadata appName="NAMD @NAMDVER@ (compiled with @COMPILERNAME@ @ADDCUDA@)">
     <usage><![CDATA[NAMD]]></usage>
     <info xsd:type="xsd:string">
     <![CDATA[
@@ -51,7 +51,7 @@
 
     </types>
   </metadata>
-  <binaryLocation>@PKGROOT@/bin/namd.sh</binaryLocation>
+  <binaryLocation>@PKGROOT@@CUDA@/bin/namd.sh</binaryLocation>
   <jobManagerFQCN>edu.sdsc.nbcr.opal.manager.ForkJobManager</jobManagerFQCN>
   <parallel>false</parallel>
 </appConfig>

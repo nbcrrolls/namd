@@ -72,6 +72,10 @@ ifndef ROLLNETWORK
   ROLLNETWORK = eth
 endif
 
+ifndef ROLLCUDA
+  ROLLCUDA = nocuda
+endif
+
 -include $(ROLLSROOT)/etc/Rolls.mk
 include Rolls.mk
 
@@ -90,11 +94,14 @@ preroll::
 	  for m in $(ROLLMPI); do \
 	    perl -pi -e 'print and s/ROLLMPI/'$${m}'/g if m/ROLLMPI/' $$o; \
 	  done; \
-	  perl -pi -e '$$_ = "" if m/ROLL(COMPILER|NETWORK|MPI)/' $$o; \
+	  for k in $(ROLLCUDA); do \
+	    perl -pi -e 'print and s/ROLLCUDA/'$${k}'/g if m/ROLLCUDA/' $$o; \
+	  done; \
+	  perl -pi -e '$$_ = "" if m/ROLL(COMPILER|NETWORK|MPI|CUDA)/' $$o; \
 	done
 
 default:
-	$(MAKE) ROLLCOMPILER="$(ROLLCOMPILER)" ROLLNETWORK="$(ROLLNETWORK)" ROLLMPI="$(ROLLMPI)" roll
+	$(MAKE) ROLLCOMPILER="$(ROLLCOMPILER)" ROLLNETWORK="$(ROLLNETWORK)" ROLLMPI="$(ROLLMPI)" ROLLCUDA="$(ROLLCUDA)" roll
 
 clean::
 	rm -f _arch bootstrap.py

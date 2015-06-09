@@ -13,6 +13,6 @@
 	<changelog>
 	</changelog>
 
-	<package>namd-opal</package>
+	<package>namd-opal-ROLLCOMPILER-ROLLNETWORK-ROLLMPI-ROLLCUDA</package>
 
 </kickstart>

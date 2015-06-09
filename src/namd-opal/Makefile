@@ -70,6 +70,8 @@ ADDSED = \
 	-e s%@COMPILERNAME@%$(COMPILERNAME)%g  \
 	-e s%@NAMDVER@%$(NAMDVER)%g  \
 	-e s%@PKGROOT@%$(PKGROOT)%g  \
+	-e s%@CUDA@%$(CUDA)%g  \
+	-e s%@ADDCUDA@%$(ADDCUDA)%g  \
 	-e s%@ROLLNETWORK@%$(ROLLNETWORK)%g 
 
 $(VERSION.MK.INCLUDE): 
@@ -86,9 +88,9 @@ build: $(SCRIPTS)
 
 install:: 
 	mkdir -p $(ROOT)/$(OPALDIR)
-	$(INSTALL)  -m 0644  namd.xml $(ROOT)/$(OPALDIR)/namd_$(NAMDVER).xml
-	mkdir -p $(ROOT)/$(PKGROOT)/bin
-	install -m755 namdsh  $(ROOT)/$(PKGROOT)/bin/namd.sh
+	$(INSTALL)  -m 0644  namd.xml $(ROOT)/$(OPALDIR)/namd_$(NAMDVER)_$(COMPILERNAME)$(CUDAEXT).xml
+	mkdir -p $(ROOT)/$(PKGROOT)/$(COMPILERNAME)$(CUDA)/bin
+	install -m755 namdsh  $(ROOT)/$(PKGROOT)/$(COMPILERNAME)$(CUDA)/bin/namd.sh
 
 clean::
 	rm -rf $(SCRIPTS)

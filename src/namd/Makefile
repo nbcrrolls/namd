@@ -72,7 +72,7 @@ build: $(SRC_DIRS) $(EXFILES)
 	cd $(SOURCE_DIR) && tar xf charm-$(CHARMVER).tar
 	( \
 	  $(MODULE_LOAD_CC); \
-	  $(MODULE_LOAD_MPI); \
+	  $(MODULE_LOAD_OPENMPI); \
 	  if test -e $(CUDAHOME); then \
 	    $(MODULE_LOAD_CUDA); \
 	  fi; \
@@ -89,13 +89,11 @@ build: $(SRC_DIRS) $(EXFILES)
 	  make -j 16 \
 	)
 
+
 install::
-	mkdir -p -m 755 $(ROOT)/$(PKGROOT)/bin
-	cp $(SOURCE_DIR)/*/{charmrun,flipbinpdb,flipdcd,namd2,psfgen} \
-	   $(ROOT)/$(PKGROOT)/bin
-	cp -r tiny $(ROOT)/$(PKGROOT)
-	mkdir -p -m 755 $(ROOT)/$(PKGROOT)/examples
-	install -m 644 sge-namd*.sub $(ROOT)/$(PKGROOT)/examples/
+	mkdir -p -m 755 $(ROOT)/$(PKGROOT)$(CUDA)/bin
+	cp $(SOURCE_DIR)/Linux-x86_64-MPI-$(CC)/{charmrun,flipbinpdb,flipdcd,namd2,psfgen} \
+	   $(ROOT)/$(PKGROOT)$(CUDA)/bin
 
 clean::
 	rm -rf $(SRC_DIRS) 

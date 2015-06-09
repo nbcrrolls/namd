@@ -14,8 +14,9 @@
 
 	<package>namd-fftw-ROLLCOMPILER</package>
 	<package>namd-tcl-ROLLCOMPILER</package>
-	<package>namd-ROLLCOMPILER-ROLLNETWORK-ROLLMPI</package>
-	<package>namd-module-ROLLCOMPILER-ROLLNETWORK-ROLLMPI</package>
+	<package>namd-roll-test</package>
+	<package>namd-ROLLCOMPILER-ROLLNETWORK-ROLLMPI-ROLLCUDA</package>
+	<package>namd-module-ROLLCOMPILER-ROLLNETWORK-ROLLMPI-ROLLCUDA</package>
 
 <post>
 </post>

@@ -72,10 +72,10 @@ cat >> $SUB << EOF
 #$ -e $config.err
 #$ -o $config.out
 
-# load NAMD module. It will load prerequisite compiler and mpi modules
-module load namd@NAMDVER@/@COMPILERNAME@
+# load NAMD module. It will load prerequisite compiler, @ADDCUDA@ and mpi modules
+module load namd@NAMDVER@/@COMPILERNAME@@CUDA@
 
-PROGRAM=@PKGROOT@/bin/namd2
+PROGRAM=@PKGROOT@@CUDA@/bin/namd2
 
 \$MPIRUN -np \$NSLOTS \$PROGRAM $config > $config-output
 
