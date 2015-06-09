@@ -18,12 +18,13 @@ my @NETWORKS = split(/\s+/, 'ROLLNETWORK');
 my @MPIS = split(/\s+/, 'ROLLMPI');
 my @OPTCUDA = split(/\s+/, 'ROLLCUDA');
 
-my $NVER = VERSION;
+my $NVER = "VERSION";
 
 $packageHome = "/opt/namd$NVER";
 $testDir = "$packageHome/tiny";
 SKIP: {
-  skip 'namd test not installed', 1 if ! -d $testDir;
+ `/bin/ls $testDir 2>&1`;
+  ok($? == 0, "namd test installed $testDir");
 }
 
 foreach my $mpi (@MPIS) {
