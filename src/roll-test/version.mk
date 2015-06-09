@@ -1,19 +1,3 @@
-ifndef ROLLCOMPILER
-  ROLLCOMPILER = gnu
-endif
-COMPILERNAME := $(firstword $(subst /, ,$(ROLLCOMPILER)))
-
-ifndef ROLLNETWORK
-  ROLLNETWORK = eth
-endif
-
-ifndef ROLLMPI
-  ROLLMPI = openmpi
-endif
-
-ifndef ROLLCUDA
-  ROLLCUDA = nocuda
-endif
 
 VERSION.MK.MASTER = version.mk
 VERSION.MK.MASTER.DIR = ..

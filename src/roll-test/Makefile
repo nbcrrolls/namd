@@ -62,13 +62,8 @@ include $(NBCRDEVEL)/NBCR.mk
 
 EXFILES = sge-namd.sub sge-namd-cuda.sub
 
-ADDSED = \
-	-e s%@PREREQMODULES@%$(PREREQMODULES)%g  \
-	-e s%@COMPILERNAME@%$(COMPILERNAME)%g  \
-	-e s%@ROLLNETWORK@%$(ROLLNETWORK)%g
-
 %: %.in
-	$(SED) $(SEDSCRIPT) $(ADDSED) $^ > $@
+	$(SED) $(SEDSCRIPT) $^ > $@
 
 pretar:: $(VERSION.MK.INCLUDE)
 
@@ -83,7 +78,7 @@ install::
 	mkdir -p -m 755 $(ROOT)/root/rolltest
 	$(INSTALL) -m0755 *.t $(ROOT)/root/rolltest
 	$(SED) -i $(SEDROLLOPT) $(ROOT)/root/rolltest/*.t
-	$(SED) -i -e s%ROLLCUDA%$(ROLLCUDA)%g $(ROOT)/root/rolltest/*.t
+	$(SED) -i "s%ROLLCUDA%$(ROLLCUDA)%g" $(ROOT)/root/rolltest/*.t
 	mkdir -p -m 755 $(ROOT)/$(PKGROOT)
 	cp -r tiny $(ROOT)/$(PKGROOT)
 	mkdir -p -m 755 $(ROOT)/$(PKGROOT)/examples

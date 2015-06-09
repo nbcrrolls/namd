@@ -1,11 +1,12 @@
 ######################################################################
 #  Example SGE submit script  
-#  run namd2 compiled with GNU compilers and MPI 
+#  run namd2 compiled with GNU compilers and openmpi 
 #
 #  Currently the following nmd modules are available:
 #      namd@VERSION@/gnu   - compiled with gnu complier 
 #      namd@VERSION@/intel - compiled with intel complier 
 #
+#  Use "module load command" to load a module with needed compiler
 ######################################################################
 
 #$ -V
