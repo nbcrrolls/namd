@@ -7,7 +7,7 @@
 proc ModulesHelp { } {
         global namdversion
 
-        puts stderr "\NAMD Tools from /opt/namd@VERSION@/@COMPILERNAME@"
+        puts stderr "\NAMD Tools from /opt/namd@VERSION@/@COMPILERNAME@@CUDA@"
         puts stderr "\tNAMD Version $namdversion\n"
 }
 
@@ -20,7 +20,7 @@ module-whatis   "TCL version @TCLVER@ "
 set     namdversion @VERSION@
 
 
-set namdHome /opt/namd@VERSION@/@COMPILERNAME@
+set namdHome /opt/namd@VERSION@/@COMPILERNAME@@CUDA@
 setenv NAMDHOME  $namdHome
 prepend-path PATH $namdHome/bin
 prepend-path LD_LIBRARY_PATH $namdHome/lib
