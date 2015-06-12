@@ -95,7 +95,11 @@ preroll::
 	    perl -pi -e 'print and s/ROLLMPI/'$${m}'/g if m/ROLLMPI/' $$o; \
 	  done; \
 	  for k in $(ROLLCUDA); do \
-	    perl -pi -e 'print and s/ROLLCUDA/'$${k}'/g if m/ROLLCUDA/' $$o; \
+            if [ $${k} == "cuda" ]; then \
+                perl -pi -e 'print and s/ROLLCUDA/'$${k}'/g and s/ COND/ cond="cuda"/g if m/ROLLCUDA/' $$o; \
+            else \
+                perl -pi -e 'print and s/ROLLCUDA/'$${k}'/g and s/ COND//g if m/ROLLCUDA/' $$o; \
+            fi; \
 	  done; \
 	  perl -pi -e '$$_ = "" if m/ROLL(COMPILER|NETWORK|MPI|CUDA)/' $$o; \
 	done
