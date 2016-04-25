@@ -85,4 +85,4 @@ install::
 	install -m 644 sge-namd*.sub $(ROOT)/$(PKGROOT)/examples/
 
 clean::
-	rm -rf $(SRC_DIRS)
+	rm -rf $(SRC_DIRS) $(EXFILES)
